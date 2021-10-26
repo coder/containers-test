@@ -1,0 +1,2 @@
+deb [signed-by=/usr/local/share/keyrings/git-core.gpg] http://ppa.launchpad.net/git-core/ppa/ubuntu focal main
+deb-src [signed-by=/usr/local/share/keyrings/git-core.gpg] http://ppa.launchpad.net/git-core/ppa/ubuntu focal main

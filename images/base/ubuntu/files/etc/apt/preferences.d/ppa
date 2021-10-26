@@ -1,0 +1,13 @@
+# Ignore all packages from this repository by default
+Package: *
+Pin: origin ppa.launchpad.net
+Pin-Priority: 1
+
+# Git
+Package: git
+Pin: origin ppa.launchpad.net
+Pin-Priority: 500
+
+Package: git-man
+Pin: origin ppa.launchpad.net
+Pin-Priority: 500
