@@ -1,0 +1,66 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  schedule:
+    # Re-build all images at 2am UTC every Monday (8pm CST/9pm CDT)
+    #
+    # This ensures we always start with a recent base image, which
+    # reduces wasted space due to written-over files in the writable
+    # layer, ensures packages are up-to-date (since many of these
+    # images install the latest versions of packages available at
+    # build time), and allow us to ensure that images continue to
+    # be buildable from source (no removed packages).
+    #
+    # See: https://crontab.guru/#0_2_*_*_1
+    - cron: "0 2 * * 1"
+
+  workflow_dispatch:
+
+permissions:
+  actions: none
+  checks: none
+  contents: read
+  deployments: none
+  issues: none
+  packages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
+
+jobs:
+  image-minimal-ubuntu:
+    runs-on: ubuntu-20.04
+    name: image/minimal/ubuntu
+    permissions:
+      id-token: write
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+
+      - name: Print auth list
+        run: gcloud auth list
+
+      - name: Print application default token
+        run: gcloud auth application-default print-access-token
