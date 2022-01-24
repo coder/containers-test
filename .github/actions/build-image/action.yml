@@ -11,9 +11,6 @@ runs:
       if: github.event_name == 'pull_request'
       uses: styfle/cancel-workflow-action@0.9.1
 
-    - name: Checkout
-      uses: actions/checkout@v2
-
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v0
       with:
