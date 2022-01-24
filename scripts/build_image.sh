@@ -167,4 +167,5 @@ pushd "$IMAGE_PATH"
 
       run_trace $DRY_RUN docker build "$IMAGE_PATH" "${docker_build_args[@]}"
     fi
+  fi
 popd
