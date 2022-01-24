@@ -38,6 +38,7 @@ permissions:
 
 jobs:
   images-minimal-ubuntu-focal:
+    name: images/minimal/ubuntu/focal
     runs-on: ubuntu-20.04
     permissions:
       contents: read
@@ -73,8 +74,8 @@ jobs:
         run: |
           ./scripts/build_image.sh \
             --name=coder-minimal-ubuntu \
+            --path=./images/minimal/ubuntu/focal \
             --tag=focal \
             --tag=latest \
             --pull-request=${{ github.event.number }} \
             --push=true
-        working-directory: ./images/minimal/ubuntu/focal
