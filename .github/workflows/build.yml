@@ -74,8 +74,8 @@ jobs:
         run: |
           ./scripts/build_image.sh \
             --name=coder-minimal-ubuntu \
-            --path=./images/minimal/ubuntu/focal \
+            --path="${{ github.workspace }}/images/minimal/ubuntu/focal" \
             --tag=focal \
             --tag=latest \
-            --pull-request=${{ github.event.number }} \
+            --pull-request="${{ github.event.number }}" \
             --push=true
