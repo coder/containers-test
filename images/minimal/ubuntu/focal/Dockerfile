@@ -1,6 +1,6 @@
 # Ubuntu 20.04 LTS (Focal Fossa)
-ARG BASE_REGISTRY=docker.io
-ARG BASE_IMAGE=library/ubuntu
+ARG BASE_REGISTRY=docker.io/library
+ARG BASE_IMAGE=ubuntu
 ARG BASE_TAG=focal
 
 FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}

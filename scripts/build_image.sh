@@ -142,11 +142,14 @@ pushd "$IMAGE_PATH"
 
     for tag in "${IMAGE_TAGS[@]}"; do
       docker_build_args+=(
-        --tag "$REGISTRY_PRODUCTION/$IMAGE_NAME:$tag"
+        --tag="$REGISTRY_PRODUCTION/$IMAGE_NAME:$tag"
       )
     done
 
     run_trace $DRY_RUN docker build "$IMAGE_PATH" "${docker_build_args[@]}"
+    for tag in "${IMAGE_TAGS[@]}"; do
+      run_trace $DRY_RUN docker push "$REGISTRY_PRODUCTION/$IMAGE_NAME:$tag"
+    done
   elif [ "$PULL_REQUEST" -gt 0 ]; then
     echo "Running in a pull request..."
     if ! files_changed "$IMAGE_PATH"; then
@@ -161,11 +164,15 @@ pushd "$IMAGE_PATH"
 
       for tag in "${IMAGE_TAGS[@]}"; do
         docker_build_args+=(
-          --tag "$REGISTRY_DEVELOPMENT/pr-$PULL_REQUEST/$IMAGE_NAME:$tag"
+          --tag="$REGISTRY_DEVELOPMENT/pr-$PULL_REQUEST/$IMAGE_NAME:$tag"
+          --build-arg=BASE_REGISTRY="$REGISTRY_DEVELOPMENT/pr-$PULL_REQUEST"
         )
       done
 
       run_trace $DRY_RUN docker build "$IMAGE_PATH" "${docker_build_args[@]}"
+      for tag in "${IMAGE_TAGS[@]}"; do
+        run_trace $DRY_RUN docker push "$REGISTRY_DEVELOPMENT/pr-$PULL_REQUEST/$IMAGE_NAME:$tag"
+      done
     fi
   fi
 popd
