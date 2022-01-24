@@ -51,6 +51,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v0
@@ -97,6 +100,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v0
