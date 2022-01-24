@@ -41,6 +41,7 @@ jobs:
     runs-on: ubuntu-20.04
     name: image/minimal/ubuntu
     permissions:
+      contents: read
       id-token: write
     steps:
       - name: Cancel previous runs
