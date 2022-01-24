@@ -37,17 +37,44 @@ permissions:
   statuses: none
 
 jobs:
-  image-minimal-ubuntu:
+  images-minimal-ubuntu-focal:
     runs-on: ubuntu-20.04
-    name: image/minimal/ubuntu
     permissions:
       contents: read
       id-token: write
     steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build image
-        uses: ./.github/actions/build-image
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
         with:
-          path: ./images/minimal/ubuntu/focal
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker gcr.io
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-minimal-ubuntu:focal
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-minimal-ubuntu \
+            --tag=focal \
+            --tag=latest \
+            --pull-request=${{ github.event.number }} \
+            --push=true
+        working-directory: ./images/minimal/ubuntu/focal
