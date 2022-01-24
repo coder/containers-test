@@ -22,9 +22,12 @@ runs:
 
     - name: Print auth list
       run: gcloud auth list
+      shell: bash
 
     - name: Print application default token
       run: gcloud auth application-default print-access-token
+      shell: bash
 
     - name: Configure Docker
       run: gcloud auth configure-docker gcr.io
+      shell: bash
