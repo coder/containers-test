@@ -1,0 +1,33 @@
+name: build-image
+description: "Build a container image"
+inputs:
+  path:
+    description: "Working directory of image (where Dockerfile is located), relative to the repository root"
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Cancel previous runs
+      if: github.event_name == 'pull_request'
+      uses: styfle/cancel-workflow-action@0.9.1
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0
+      with:
+        workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+        service_account: github@coder-ci.iam.gserviceaccount.com
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: Print auth list
+      run: gcloud auth list
+
+    - name: Print application default token
+      run: gcloud auth application-default print-access-token
+
+    - name: Configure Docker
+      run: gcloud auth configure-docker gcr.io
