@@ -41,6 +41,7 @@ jobs:
     name: images/minimal/ubuntu/focal
     runs-on: ubuntu-20.04
     permissions:
+      actions: write # for cancel-workflow-action
       contents: read
       id-token: write
     steps:
@@ -86,6 +87,7 @@ jobs:
     needs:
       - images-minimal-ubuntu-focal
     permissions:
+      actions: write # for cancel-workflow-action
       contents: read
       id-token: write
     steps:
