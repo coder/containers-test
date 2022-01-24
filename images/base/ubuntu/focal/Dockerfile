@@ -7,4 +7,6 @@ FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
 SHELL ["/bin/bash", "-c"]
 
+RUN echo "test"
+
 USER coder
