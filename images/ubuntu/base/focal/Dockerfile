@@ -8,6 +8,9 @@ FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 SHELL ["/bin/bash", "-c"]
 
 # Re-enable manual pages - Ubuntu strips these by default
-RUN yes | unminimize
+RUN yes | unminimize && \
+    # Delete package cache to avoid consuming space in layer
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 USER coder
