@@ -20,7 +20,10 @@ RUN apt-get update --quiet --option Dir::Etc::SourceParts="" && \
       bash \
       ca-certificates \
       curl \
-      locales
+      locales && \
+    # Delete package cache to avoid consuming space in layer
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Add a user `coder` so that you're not developing as the `root` user
 RUN useradd coder \
