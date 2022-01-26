@@ -20,7 +20,7 @@ tags=(
 )
 
 for tag in "${tags[@]}"; then
-  pushd "$PROJECT_ROOT/images/minimal/ubuntu/$tag/files/usr/share/keyrings"
+  pushd "$PROJECT_ROOT/images/ubuntu/base/$tag/files/usr/share/keyrings"
     # Upstream Docker signing key
     curl "${curl_flags[@]}" "https://download.docker.com/linux/ubuntu/gpg" | \
       gpg "${gpg_flags[@]}" --output="docker.gpg"

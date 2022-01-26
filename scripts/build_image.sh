@@ -147,9 +147,12 @@ pushd "$IMAGE_PATH"
     done
 
     run_trace $DRY_RUN docker build "$IMAGE_PATH" "${docker_build_args[@]}"
-    for tag in "${IMAGE_TAGS[@]}"; do
-      run_trace $DRY_RUN docker push "$REGISTRY_PRODUCTION/$IMAGE_NAME:$tag"
-    done
+
+    if [ "$IMAGE_PUSH" == "true" ]; then
+      for tag in "${IMAGE_TAGS[@]}"; do
+        run_trace $DRY_RUN docker push "$REGISTRY_PRODUCTION/$IMAGE_NAME:$tag"
+      done
+    fi
   elif [ "$PULL_REQUEST" -gt 0 ]; then
     echo "Running in a pull request..."
     if ! files_changed "$IMAGE_PATH"; then
@@ -170,6 +173,9 @@ pushd "$IMAGE_PATH"
       done
 
       run_trace $DRY_RUN docker build "$IMAGE_PATH" "${docker_build_args[@]}"
+    fi
+
+    if [ "$IMAGE_PUSH" == "true" ]; then
       for tag in "${IMAGE_TAGS[@]}"; do
         run_trace $DRY_RUN docker push "$REGISTRY_DEVELOPMENT/pr-$PULL_REQUEST/$IMAGE_NAME:$tag"
       done
