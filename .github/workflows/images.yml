@@ -86,7 +86,7 @@ jobs:
   ubuntu-base-focal:
     name: ubuntu/base/focal
     needs:
-      - ubuntu-base-focal
+      - ubuntu-minimal-focal
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel previous runs

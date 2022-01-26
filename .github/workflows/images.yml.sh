@@ -63,7 +63,7 @@ function write_build() {
 
   # Sanitized names for use in image names
   job_image_name=$(echo "$image_path" | tr "/" "-")
-  job_from_name=$(echo "$image_path" | tr "/" "-")
+  job_from_name=$(echo "$from_path" | tr "/" "-")
 
   # Assume the last folder is the default path
   image_name=$(dirname "$image_path")
