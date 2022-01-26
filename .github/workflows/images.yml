@@ -31,7 +31,6 @@ permissions:
   checks: none
   contents: read
   deployments: none
-  id-token: write # for workload identity federation
   issues: none
   packages: none
   pull-requests: none
