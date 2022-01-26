@@ -1,0 +1,1 @@
+deb [signed-by=/usr/local/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu focal stable

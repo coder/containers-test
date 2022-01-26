@@ -19,8 +19,8 @@ tags=(
   focal
 )
 
-for tag in "${tags[@]}"; then
-  pushd "$PROJECT_ROOT/images/ubuntu/base/$tag/files/usr/share/keyrings"
+for tag in "${tags[@]}"; do
+  pushd "$PROJECT_ROOT/images/ubuntu/base/$tag/files/usr/local/share/keyrings"
     # Upstream Docker signing key
     curl "${curl_flags[@]}" "https://download.docker.com/linux/ubuntu/gpg" | \
       gpg "${gpg_flags[@]}" --output="docker.gpg"
