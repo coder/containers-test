@@ -7,6 +7,8 @@ FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
 SHELL ["/bin/bash", "-c"]
 
+USER root
+
 # Copy configuration files to appropriate locations
 COPY files /
 

@@ -7,8 +7,28 @@ FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
 SHELL ["/bin/bash", "-c"]
 
-# Re-enable manual pages - Ubuntu strips these by default
-RUN yes | unminimize && \
+USER root
+
+# Copy configuration files to appropriate locations
+COPY files /
+
+RUN apt-get update --quiet && \
+    # Install packages from official repository or mirror
+    apt-get install --yes --quiet \
+      build-essential \
+      locales \
+      man \
+      python3 \
+      python3-pip \
+      software-properties-common \
+      sudo \
+      systemd \
+      systemd-sysv \
+      unzip \
+      vim \
+      wget && \
+    # Re-enable manual pages - Ubuntu strips these by default
+    yes | unminimize && \
     # Delete package cache to avoid consuming space in layer
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
