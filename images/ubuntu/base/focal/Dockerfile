@@ -12,6 +12,8 @@ USER root
 # Copy configuration files to appropriate locations
 COPY files /
 
+# Install packages from apt repositories
+ARG DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update --quiet && \
     # Install packages from official repository or mirror
     apt-get install --yes --quiet \
