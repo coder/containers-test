@@ -31,6 +31,7 @@ permissions:
   checks: none
   contents: read
   deployments: none
+  id-token: write # for workload identity federation
   issues: none
   packages: none
   pull-requests: none
@@ -42,10 +43,6 @@ jobs:
   ubuntu-minimal-focal:
     name: ubuntu/minimal/focal
     runs-on: ubuntu-20.04
-    permissions:
-      actions: write # for cancel-workflow-action
-      contents: read
-      id-token: write # for workload identity federation
     steps:
       - name: Cancel previous runs
         if: github.event_name == 'pull_request'
@@ -91,10 +88,6 @@ jobs:
     needs:
       - ubuntu-minimal-focal
     runs-on: ubuntu-20.04
-    permissions:
-      actions: write # for cancel-workflow-action
-      contents: read
-      id-token: write # for workload identity federation
     steps:
       - name: Cancel previous runs
         if: github.event_name == 'pull_request'

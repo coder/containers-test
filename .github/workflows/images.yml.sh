@@ -43,7 +43,7 @@ append '  actions: write # for cancel-workflow-action'
 append '  checks: none'
 append '  contents: read'
 append '  deployments: none'
-# append '  id-token: write # for workload identity federation'
+append '  id-token: write # for workload identity federation'
 append '  issues: none'
 append '  packages: none'
 append '  pull-requests: none'
@@ -81,14 +81,6 @@ function write_build() {
     append "      - $job_from_name"
   fi
   append '    runs-on: ubuntu-20.04'
-  # Workaround: GitHub does not appear to support granting of
-  # the id-token permission globally to the workflow, so we add
-  # it for all jobs.
-  append '    permissions:'
-  append '      actions: write # for cancel-workflow-action'
-  append '      contents: read'
-  append '      id-token: write # for workload identity federation'
-  # End workaround
   append '    steps:'
   append '      - name: Cancel previous runs'
   append "        if: github.event_name == 'pull_request'"
