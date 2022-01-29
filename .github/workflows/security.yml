@@ -1,0 +1,58 @@
+# Container image scan workflow
+name: security
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/security.yaml
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/security.yaml
+
+  schedule:
+    # Run scans at 4am UTC every day (12am CST/1am CDT)
+    #
+    # See: https://crontab.guru/#0_4_*_*_*
+    - cron: "0 4 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  actions: write # for cancel-workflow-action
+  checks: none
+  contents: read
+  deployments: none
+  id-token: none
+  issues: none
+  packages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
+
+jobs:
+  image-scan:
+    name: "${{ matrix.image }}"
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        image:
+          - "coder-ubuntu-minimal:focal"
+          - "coder-ubuntu-base:focal"
+      fail-fast: false
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-ref: "docker.io/jawnsy/${{ matrix.image }}"
+          exit-code: "1"
+          severity: "CRITICAL,HIGH"
