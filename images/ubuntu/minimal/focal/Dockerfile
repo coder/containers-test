@@ -1,9 +1,5 @@
 # Ubuntu 20.04 LTS (Focal Fossa)
-ARG BASE_REGISTRY=docker.io/library
-ARG BASE_IMAGE=ubuntu
-ARG BASE_TAG=focal
-
-FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
+FROM docker.io/library/ubuntu:focal
 
 SHELL ["/bin/bash", "-c"]
 
