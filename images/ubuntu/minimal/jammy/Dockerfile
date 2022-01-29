@@ -1,5 +1,5 @@
-# Ubuntu 20.04 LTS (Focal Fossa)
-FROM docker.io/library/ubuntu:focal
+# Ubuntu 22.04 LTS (Jammy Jellyfish)
+FROM docker.io/library/ubuntu:jammy
 
 SHELL ["/bin/bash", "-c"]
 
