@@ -42,17 +42,27 @@ jobs:
     strategy:
       matrix:
         image:
+          # Ubuntu 20.04 LTS (Focal Fossa)
           - "coder-ubuntu-minimal:focal"
           - "coder-ubuntu-base:focal"
+          # Ubuntu 22.04 LTS (Jammy Jellyfish)
+          - "coder-ubuntu-minimal:jammy"
+          - "coder-ubuntu-base:jammy"
       fail-fast: false
     steps:
       - name: Cancel previous runs
         if: github.event_name == 'pull_request'
         uses: styfle/cancel-workflow-action@0.9.1
 
-      - name: Scan image with Trivy
+      - name: Scan image with AquaSec Trivy
         uses: aquasecurity/trivy-action@master
         with:
           scan-ref: "docker.io/jawnsy/${{ matrix.image }}"
           exit-code: "1"
           severity: "CRITICAL,HIGH"
+
+      - name: Scan image with Anchore Grype
+        uses: anchore/scan-action@v3
+        with:
+          image: "docker.io/jawnsy/${{ matrix.image }}"
+          severity-cutoff: "high"
