@@ -147,4 +147,4 @@ write_build "debian/base/testing" "debian/minimal/testing" false
 
 # Debian unstable
 write_build "debian/minimal/unstable" "" false
-write_build "debian/base/unstable" "ubuntu/minimal/unstable" false
+write_build "debian/base/unstable" "debian/minimal/unstable" false
