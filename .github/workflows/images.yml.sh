@@ -54,7 +54,7 @@ append ''
 append '# Cancel in-progress runs for pull requests when developers push'
 append '# additional changes'
 append 'concurrency:'
-append '  group: ${{ github.ref }}'
+append '  group: ${{ github.workflow }}-${{ github.ref }}'
 append '  cancel-in-progress: ${{ github.event_name == '"'pull_request'"' }}'
 
 append 'jobs:'

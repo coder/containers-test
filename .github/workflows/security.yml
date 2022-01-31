@@ -38,7 +38,7 @@ permissions:
 # Cancel in-progress runs for pull requests when developers push
 # additional changes
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
