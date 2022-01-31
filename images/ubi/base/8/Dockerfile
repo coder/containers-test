@@ -3,6 +3,8 @@ ARG BASE_REGISTRY=docker.io/jawnsy
 ARG BASE_IMAGE=coder-ubi-minimal
 ARG BASE_TAG=8
 
+FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
+
 SHELL ["/bin/bash", "-c"]
 
 USER root
