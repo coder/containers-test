@@ -139,7 +139,7 @@ write_build "ubuntu/base/rolling" "ubuntu/minimal/rolling" false
 
 # Debian 11 (bullseye)
 write_build "debian/minimal/bullseye" "" true
-write_build "debian/minimal/bullseye" "ubuntu/minimal/bullseye" true
+write_build "debian/base/bullseye" "debian/minimal/bullseye" true
 
 # Debian testing
 write_build "debian/minimal/testing" "" false

@@ -343,10 +343,10 @@ jobs:
             --pull-request="${{ github.event.number }}" \
             --push=true
 
-  debian-minimal-bullseye:
-    name: debian/minimal/bullseye
+  debian-base-bullseye:
+    name: debian/base/bullseye
     needs:
-      - ubuntu-minimal-bullseye
+      - debian-minimal-bullseye
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel previous runs
@@ -378,11 +378,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build coder-debian-minimal:bullseye
+      - name: Build coder-debian-base:bullseye
         run: |
           ./scripts/build_image.sh \
-            --name=coder-debian-minimal \
-            --path="${{ github.workspace }}/images/debian/minimal/bullseye" \
+            --name=coder-debian-base \
+            --path="${{ github.workspace }}/images/debian/base/bullseye" \
             --tag="bullseye" \
             --tag="latest" \
             --pull-request="${{ github.event.number }}" \
