@@ -57,7 +57,7 @@ jobs:
       - name: Scan image with AquaSec Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          scan-ref: "docker.io/jawnsy/${{ matrix.image }}"
+          image-ref: "docker.io/jawnsy/${{ matrix.image }}"
           exit-code: "1"
           severity: "CRITICAL,HIGH"
 
@@ -66,3 +66,4 @@ jobs:
         with:
           image: "docker.io/jawnsy/${{ matrix.image }}"
           severity-cutoff: "high"
+          debug: true
