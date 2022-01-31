@@ -15,7 +15,8 @@ COPY files /
 RUN dnf install --assumeyes \
       containerd.io \
       docker-ce \
-      docker-ce-cli && \
+      docker-ce-cli \
+      sudo && \
     dnf clean all
 
 RUN usermod --groups docker coder
