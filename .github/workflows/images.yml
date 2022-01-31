@@ -214,3 +214,349 @@ jobs:
             --pull-request="${{ github.event.number }}" \
             --push=true
 
+  ubuntu-minimal-rolling:
+    name: ubuntu/minimal/rolling
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-ubuntu-minimal:rolling
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-ubuntu-minimal \
+            --path="${{ github.workspace }}/images/ubuntu/minimal/rolling" \
+            --tag="rolling" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  ubuntu-base-rolling:
+    name: ubuntu/base/rolling
+    needs:
+      - ubuntu-minimal-rolling
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-ubuntu-base:rolling
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-ubuntu-base \
+            --path="${{ github.workspace }}/images/ubuntu/base/rolling" \
+            --tag="rolling" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  debian-minimal-bullseye:
+    name: debian/minimal/bullseye
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-debian-minimal:bullseye
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-debian-minimal \
+            --path="${{ github.workspace }}/images/debian/minimal/bullseye" \
+            --tag="bullseye" \
+            --tag="latest" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  debian-base-bullseye:
+    name: debian/base/bullseye
+    needs:
+      - debian-minimal-bullseye
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-debian-base:bullseye
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-debian-base \
+            --path="${{ github.workspace }}/images/debian/base/bullseye" \
+            --tag="bullseye" \
+            --tag="latest" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  debian-minimal-testing:
+    name: debian/minimal/testing
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-debian-minimal:testing
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-debian-minimal \
+            --path="${{ github.workspace }}/images/debian/minimal/testing" \
+            --tag="testing" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  debian-base-testing:
+    name: debian/base/testing
+    needs:
+      - debian-minimal-testing
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-debian-base:testing
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-debian-base \
+            --path="${{ github.workspace }}/images/debian/base/testing" \
+            --tag="testing" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  debian-minimal-unstable:
+    name: debian/minimal/unstable
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-debian-minimal:unstable
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-debian-minimal \
+            --path="${{ github.workspace }}/images/debian/minimal/unstable" \
+            --tag="unstable" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  debian-base-unstable:
+    name: debian/base/unstable
+    needs:
+      - debian-minimal-unstable
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-debian-base:unstable
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-debian-base \
+            --path="${{ github.workspace }}/images/debian/base/unstable" \
+            --tag="unstable" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+

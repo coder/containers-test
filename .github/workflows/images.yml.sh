@@ -132,3 +132,19 @@ write_build "ubuntu/base/focal" "ubuntu/minimal/focal" true
 # Ubuntu 22.04 LTS (Jammy Jellyfish)
 write_build "ubuntu/minimal/jammy" "" false
 write_build "ubuntu/base/jammy" "ubuntu/minimal/jammy" false
+
+# Ubuntu rolling release
+write_build "ubuntu/minimal/rolling" "" false
+write_build "ubuntu/base/rolling" "ubuntu/minimal/rolling" false
+
+# Debian 11 (bullseye)
+write_build "debian/minimal/bullseye" "" true
+write_build "debian/base/bullseye" "debian/minimal/bullseye" true
+
+# Debian testing
+write_build "debian/minimal/testing" "" false
+write_build "debian/base/testing" "debian/minimal/testing" false
+
+# Debian unstable
+write_build "debian/minimal/unstable" "" false
+write_build "debian/base/unstable" "debian/minimal/unstable" false
