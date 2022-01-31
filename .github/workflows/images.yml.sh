@@ -154,3 +154,11 @@ write_build "debian/base/unstable" "debian/minimal/unstable" false
 # RHEL UBI 8
 write_build "ubi/minimal/8" "" true
 write_build "ubi/base/8" "ubi/minimal/8" true
+
+# CentOS Stream 8
+write_build "centos/minimal/stream8" "" true
+write_build "centos/base/stream8" "centos/minimal/stream8" true
+
+# CentOS Stream 9
+write_build "centos/minimal/stream9" "" false
+write_build "centos/base/stream9" "centos/minimal/stream9" false
