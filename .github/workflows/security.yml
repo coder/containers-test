@@ -48,6 +48,18 @@ jobs:
           # Ubuntu 22.04 LTS (Jammy Jellyfish)
           - "coder-ubuntu-minimal:jammy"
           - "coder-ubuntu-base:jammy"
+          # Ubuntu rolling
+          - "coder-ubuntu-minimal:rolling"
+          - "coder-ubuntu-base:rolling"
+          # Debian 11 (bullseye)
+          - "coder-debian-minimal:bullseye"
+          - "coder-debian-base:bullseye"
+          # Debian testing
+          - "coder-debian-minimal:testing"
+          - "coder-debian-base:testing"
+          # Debian unstable
+          - "coder-debian-minimal:unstable"
+          - "coder-debian-base:unstable"
       fail-fast: false
     steps:
       - name: Cancel previous runs
