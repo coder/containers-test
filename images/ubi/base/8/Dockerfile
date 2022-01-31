@@ -13,10 +13,12 @@ USER root
 COPY files /
 
 RUN dnf install --assumeyes \
+      sudo && \
+    # Docker (from upstream Docker repository)
+    dnf install --assumeyes \
       containerd.io \
       docker-ce \
-      docker-ce-cli \
-      sudo && \
+      docker-ce-cli && \
     dnf clean all
 
 RUN usermod --groups docker coder
@@ -38,7 +40,3 @@ RUN curl --location "https://github.com/docker/compose/releases/download/1.29.2/
     update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/docker-compose-switch 99
 
 USER coder
-
-# install Homebrew, must be as a non-root user
-ENV PATH /home/linuxbrew/.linuxbrew/bin:${PATH}
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
