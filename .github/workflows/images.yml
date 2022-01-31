@@ -43,7 +43,7 @@ permissions:
 # additional changes
 concurrency:
   group: ${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == "pull_request" }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   ubuntu-minimal-focal:
     name: ubuntu/minimal/focal
