@@ -51,6 +51,12 @@ append '  repository-projects: none'
 append '  security-events: none'
 append '  statuses: none'
 append ''
+append '# Cancel in-progress runs for pull requests when developers push'
+append '# additional changes'
+append 'concurrency:'
+append '  group: ${{ github.workflow }}-${{ github.ref }}'
+append '  cancel-in-progress: ${{ github.event_name == '"'pull_request'"' }}'
+
 append 'jobs:'
 
 function write_build() {
@@ -82,10 +88,6 @@ function write_build() {
   fi
   append '    runs-on: ubuntu-20.04'
   append '    steps:'
-  append '      - name: Cancel previous runs'
-  append "        if: github.event_name == 'pull_request'"
-  append '        uses: styfle/cancel-workflow-action@0.9.1'
-  append ''
   append '      - name: Checkout'
   append '        uses: actions/checkout@v2'
   append '        with:'
