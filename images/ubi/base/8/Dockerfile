@@ -18,11 +18,26 @@ RUN dnf install --assumeyes \
       docker-ce-cli && \
     dnf clean all
 
-# Add a user `coder` so that you're not developing as the `root` user
-RUN useradd coder \
-      --create-home \
-      --shell=/bin/bash \
-      --uid=1000 \
-      --user-group
+RUN usermod --groups docker coder
+
+# Add docker-compose
+RUN curl --location "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-linux-x86_64" \
+      --silent --output /usr/local/bin/docker-compose-v1 && \
+    chmod +x /usr/local/bin/docker-compose-v1 && \
+    # Compose V2 as docker plugin
+    mkdir --parents /usr/local/lib/docker/cli-plugins && \
+    curl --location "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64" \
+      --silent --output /usr/local/lib/docker/cli-plugins/docker-compose && \
+    chmod +x /usr/local/lib/docker/cli-plugins/docker-compose && \
+    # compose-switch for handling compose v1/v2 compatibility
+    curl --location "https://github.com/docker/compose-switch/releases/latest/download/docker-compose-linux-amd64" \
+      --silent --output /usr/local/bin/docker-compose-switch && \
+    chmod +x /usr/local/bin/docker-compose-switch && \
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/docker-compose-v1 1 && \
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/docker-compose-switch 99
 
 USER coder
+
+# install Homebrew, must be as a non-root user
+ENV PATH /home/linuxbrew/.linuxbrew/bin:${PATH}
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
