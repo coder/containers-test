@@ -42,7 +42,7 @@ permissions:
 # Cancel in-progress runs for pull requests when developers push
 # additional changes
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   ubuntu-minimal-focal:
@@ -514,6 +514,86 @@ jobs:
             --name=coder-debian-base \
             --path="${{ github.workspace }}/images/debian/base/unstable" \
             --tag="unstable" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  ubi-minimal-8:
+    name: ubi/minimal/8
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-ubi-minimal:8
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-ubi-minimal \
+            --path="${{ github.workspace }}/images/ubi/minimal/8" \
+            --tag="8" \
+            --tag="latest" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  ubi-base-8:
+    name: ubi/base/8
+    needs:
+      - ubi-minimal-8
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-ubi-base:8
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-ubi-base \
+            --path="${{ github.workspace }}/images/ubi/base/8" \
+            --tag="8" \
+            --tag="latest" \
             --pull-request="${{ github.event.number }}" \
             --push=true
 
