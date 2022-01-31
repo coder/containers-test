@@ -39,15 +39,16 @@ permissions:
   security-events: none
   statuses: none
 
+# Cancel in-progress runs for pull requests when developers push
+# additional changes
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == "pull_request" }}
 jobs:
   ubuntu-minimal-focal:
     name: ubuntu/minimal/focal
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -89,10 +90,6 @@ jobs:
       - ubuntu-minimal-focal
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -132,10 +129,6 @@ jobs:
     name: ubuntu/minimal/jammy
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -176,10 +169,6 @@ jobs:
       - ubuntu-minimal-jammy
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -218,10 +207,6 @@ jobs:
     name: ubuntu/minimal/rolling
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -262,10 +247,6 @@ jobs:
       - ubuntu-minimal-rolling
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -304,10 +285,6 @@ jobs:
     name: debian/minimal/bullseye
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -349,10 +326,6 @@ jobs:
       - debian-minimal-bullseye
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -392,10 +365,6 @@ jobs:
     name: debian/minimal/testing
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -436,10 +405,6 @@ jobs:
       - debian-minimal-testing
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -478,10 +443,6 @@ jobs:
     name: debian/minimal/unstable
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -522,10 +483,6 @@ jobs:
       - debian-minimal-unstable
     runs-on: ubuntu-20.04
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
         uses: actions/checkout@v2
         with:

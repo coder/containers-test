@@ -35,6 +35,12 @@ permissions:
   security-events: none
   statuses: none
 
+# Cancel in-progress runs for pull requests when developers push
+# additional changes
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   image-scan:
     name: "${{ matrix.image }}"
@@ -62,10 +68,6 @@ jobs:
           - "coder-debian-base:unstable"
       fail-fast: false
     steps:
-      - name: Cancel previous runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Scan image with AquaSec Trivy
         uses: aquasecurity/trivy-action@master
         with:
