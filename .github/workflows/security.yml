@@ -6,13 +6,13 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/security.yaml
+      - .github/workflows/security.yml
 
   pull_request:
     branches:
       - main
     paths:
-      - .github/workflows/security.yaml
+      - .github/workflows/security.yml
 
   schedule:
     # Run scans at 4am UTC every day (12am CST/1am CDT)
