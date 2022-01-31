@@ -17,6 +17,8 @@ gpg_flags=(
 
 tags=(
   focal
+  jammy
+  rolling
 )
 
 for tag in "${tags[@]}"; do
