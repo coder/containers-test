@@ -150,3 +150,7 @@ write_build "debian/base/testing" "debian/minimal/testing" false
 # Debian unstable
 write_build "debian/minimal/unstable" "" false
 write_build "debian/base/unstable" "debian/minimal/unstable" false
+
+# RHEL UBI 8
+write_build "ubi/minimal/8" "" true
+write_build "ubi/base/8" "ubi/minimal/8" true
