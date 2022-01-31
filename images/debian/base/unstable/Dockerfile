@@ -15,8 +15,6 @@ COPY files /
 # Install packages from apt repositories
 ARG DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update --quiet && \
-    # Re-enable manual pages - Ubuntu strips these by default
-    yes | unminimize && \
     # Install packages from official repository or mirror
     apt-get install --yes --quiet \
       build-essential \
