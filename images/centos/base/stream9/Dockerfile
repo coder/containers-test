@@ -13,12 +13,8 @@ USER root
 COPY files /
 
 RUN dnf install --assumeyes \
+      podman-docker \
       sudo && \
-    # Docker (from upstream Docker repository)
-    dnf install --assumeyes \
-      containerd.io \
-      docker-ce \
-      docker-ce-cli && \
     dnf clean all
 
 RUN usermod --groups docker coder
