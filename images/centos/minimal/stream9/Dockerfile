@@ -8,7 +8,7 @@ USER root
 RUN dnf install --assumeyes \
       bash \
       ca-certificates \
-      curl \
+      curl-minimal \
       git && \
     dnf clean all
 
