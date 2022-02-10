@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-c"]
 
 USER root
 
-RUN pacman --noconfirm -Syyuu \
+RUN pacman --noconfirm --needed -Syyuu \
       base \
       base-devel \
       bash \
