@@ -12,7 +12,7 @@ USER root
 # Copy configuration files to appropriate locations
 COPY files /
 
-RUN pacman --noconfirm -Syyuu \
+RUN pacman --noconfirm -Syu \
       docker \
       git \
       man \
