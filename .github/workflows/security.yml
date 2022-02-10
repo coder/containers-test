@@ -66,6 +66,15 @@ jobs:
           # Debian unstable
           - "coder-debian-minimal:unstable"
           - "coder-debian-base:unstable"
+          # UBI 8
+          - "coder-ubi-minimal:8"
+          - "coder-ubi-base:8"
+          # CentOS Stream 8
+          - "coder-centos-minimal:stream8"
+          - "coder-centos-base:stream8"
+          # CentOS Stream 9
+          - "coder-centos-minimal:stream9"
+          - "coder-centos-base:stream9"
       fail-fast: false
     steps:
       - name: Scan image with AquaSec Trivy
