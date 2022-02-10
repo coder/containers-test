@@ -170,3 +170,7 @@ write_build "fedora/base/35" "fedora/minimal/35" true
 # Fedora rawhide
 write_build "fedora/minimal/rawhide" "" false
 write_build "fedora/base/rawhide" "fedora/minimal/rawhide" false
+
+# Arch Linux base
+write_build "arch/minimal/base" "" true
+write_build "arch/base/base" "arch/minimal/base" true
