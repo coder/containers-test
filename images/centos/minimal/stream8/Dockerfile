@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-c"]
 
 USER root
 
-RUN dnf install --assumeyes \
+RUN dnf install --assumeyes --quiet \
       bash \
       ca-certificates \
       curl \

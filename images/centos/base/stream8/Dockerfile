@@ -12,10 +12,10 @@ USER root
 # Copy configuration files to appropriate locations
 COPY files /
 
-RUN dnf install --assumeyes \
+RUN dnf install --assumeyes --quiet \
       sudo && \
     # Docker (from upstream Docker repository)
-    dnf install --assumeyes \
+    dnf install --assumeyes --quiet \
       containerd.io \
       docker-ce \
       docker-ce-cli && \

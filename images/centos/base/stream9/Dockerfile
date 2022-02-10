@@ -12,12 +12,11 @@ USER root
 # Copy configuration files to appropriate locations
 COPY files /
 
-RUN dnf install --assumeyes \
+RUN dnf install --assumeyes --quiet \
+      podman \
       podman-docker \
       sudo && \
     dnf clean all
-
-RUN usermod --groups docker coder
 
 # Add docker-compose
 RUN curl --location "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-linux-x86_64" \
