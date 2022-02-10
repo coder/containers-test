@@ -81,6 +81,12 @@ jobs:
           # Fedora rawhide
           - "coder-fedora-minimal:rawhide"
           - "coder-fedora-base:rawhide"
+          # Arch Linux base
+          - "coder-arch-minimal:base"
+          - "coder-arch-base:base"
+          # Arch Linux base-devel
+          - "coder-arch-minimal:base-devel"
+          - "coder-arch-base:base-devel"
       fail-fast: false
     steps:
       - name: Scan image with AquaSec Trivy
