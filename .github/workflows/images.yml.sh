@@ -162,3 +162,11 @@ write_build "centos/base/stream8" "centos/minimal/stream8" true
 # CentOS Stream 9
 write_build "centos/minimal/stream9" "" false
 write_build "centos/base/stream9" "centos/minimal/stream9" false
+
+# Fedora 35
+write_build "fedora/minimal/35" "" true
+write_build "fedora/base/35" "fedora/minimal/35" true
+
+# Fedora rawhide
+write_build "fedora/minimal/rawhide" "" false
+write_build "fedora/base/rawhide" "fedora/minimal/rawhide" false

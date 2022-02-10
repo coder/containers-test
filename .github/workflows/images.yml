@@ -755,3 +755,161 @@ jobs:
             --pull-request="${{ github.event.number }}" \
             --push=true
 
+  fedora-minimal-35:
+    name: fedora/minimal/35
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-fedora-minimal:35
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-fedora-minimal \
+            --path="${{ github.workspace }}/images/fedora/minimal/35" \
+            --tag="35" \
+            --tag="latest" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  fedora-base-35:
+    name: fedora/base/35
+    needs:
+      - fedora-minimal-35
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-fedora-base:35
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-fedora-base \
+            --path="${{ github.workspace }}/images/fedora/base/35" \
+            --tag="35" \
+            --tag="latest" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  fedora-minimal-rawhide:
+    name: fedora/minimal/rawhide
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-fedora-minimal:rawhide
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-fedora-minimal \
+            --path="${{ github.workspace }}/images/fedora/minimal/rawhide" \
+            --tag="rawhide" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  fedora-base-rawhide:
+    name: fedora/base/rawhide
+    needs:
+      - fedora-minimal-rawhide
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-fedora-base:rawhide
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-fedora-base \
+            --path="${{ github.workspace }}/images/fedora/base/rawhide" \
+            --tag="rawhide" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
