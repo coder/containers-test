@@ -993,3 +993,81 @@ jobs:
             --pull-request="${{ github.event.number }}" \
             --push=true
 
+  arch-minimal-base-devel:
+    name: arch/minimal/base-devel
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-arch-minimal:base-devel
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-arch-minimal \
+            --path="${{ github.workspace }}/images/arch/minimal/base-devel" \
+            --tag="base-devel" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
+  arch-base-base-devel:
+    name: arch/base/base-devel
+    needs:
+      - arch-minimal-base-devel
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # unlimited fetch depth is required for files_changed
+          fetch-depth: 0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github@coder-ci.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker for Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Configure Docker for Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build coder-arch-base:base-devel
+        run: |
+          ./scripts/build_image.sh \
+            --name=coder-arch-base \
+            --path="${{ github.workspace }}/images/arch/base/base-devel" \
+            --tag="base-devel" \
+            --pull-request="${{ github.event.number }}" \
+            --push=true
+
