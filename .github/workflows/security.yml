@@ -66,9 +66,15 @@ jobs:
           # Debian unstable
           - "coder-debian-minimal:unstable"
           - "coder-debian-base:unstable"
+          # UBI 7
+          - "coder-ubi-minimal:7"
+          - "coder-ubi-base:7"
           # UBI 8
           - "coder-ubi-minimal:8"
           - "coder-ubi-base:8"
+          # UBI 9
+          - "coder-ubi-minimal:9"
+          - "coder-ubi-base:9"
           # CentOS Stream 8
           - "coder-centos-minimal:stream8"
           - "coder-centos-base:stream8"

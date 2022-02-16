@@ -151,9 +151,17 @@ write_build "debian/base/testing" "debian/minimal/testing" false
 write_build "debian/minimal/unstable" "" false
 write_build "debian/base/unstable" "debian/minimal/unstable" false
 
+# RHEL UBI 7
+write_build "ubi/minimal/7" "" false
+write_build "ubi/base/7" "ubi/minimal/7" false
+
 # RHEL UBI 8
 write_build "ubi/minimal/8" "" true
 write_build "ubi/base/8" "ubi/minimal/8" true
+
+# RHEL UBI 9
+write_build "ubi/minimal/9" "" false
+write_build "ubi/base/9" "ubi/minimal/9" false
 
 # CentOS Stream 8
 write_build "centos/minimal/stream8" "" true
