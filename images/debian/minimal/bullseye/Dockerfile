@@ -3,7 +3,7 @@ FROM docker.io/library/debian:bullseye
 
 SHELL ["/bin/bash", "-c"]
 
-USER root
+USER 0
 
 # Copy configuration files to appropriate locations
 COPY files /
@@ -30,4 +30,4 @@ RUN useradd coder \
       --uid=1000 \
       --user-group
 
-USER coder
+USER 1000
