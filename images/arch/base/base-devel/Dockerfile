@@ -7,7 +7,7 @@ FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
 SHELL ["/bin/bash", "-c"]
 
-USER root
+USER 0
 
 # Copy configuration files to appropriate locations
 COPY files /
@@ -38,4 +38,4 @@ RUN curl --location "https://github.com/docker/compose/releases/download/1.29.2/
     chmod +x /usr/local/bin/docker-compose-switch && \
     ln --symbolic /usr/local/bin/docker-compose-switch /usr/local/bin/docker-compose
 
-USER coder
+USER 1000

@@ -3,7 +3,7 @@ FROM docker.io/archlinux/archlinux:base
 
 SHELL ["/bin/bash", "-c"]
 
-USER root
+USER 0
 
 RUN pacman --noconfirm --needed -Syyuu \
       base \
@@ -21,4 +21,4 @@ RUN useradd coder \
       --uid=1000 \
       --user-group
 
-USER coder
+USER 1000

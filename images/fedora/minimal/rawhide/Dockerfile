@@ -3,7 +3,7 @@ FROM registry.fedoraproject.org/fedora:rawhide
 
 SHELL ["/bin/bash", "-c"]
 
-USER root
+USER 0
 
 RUN dnf install --assumeyes --quiet \
       bash \
@@ -19,4 +19,4 @@ RUN useradd coder \
       --uid=1000 \
       --user-group
 
-USER coder
+USER 1000
