@@ -56,7 +56,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -97,7 +97,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -136,7 +136,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -176,7 +176,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -214,7 +214,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -254,7 +254,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -292,7 +292,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -333,7 +333,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -372,7 +372,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -412,7 +412,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -450,7 +450,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -490,7 +490,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -528,7 +528,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -569,7 +569,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -608,7 +608,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -649,7 +649,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -688,7 +688,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -728,7 +728,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -766,7 +766,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -807,7 +807,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -846,7 +846,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -886,7 +886,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -924,7 +924,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -965,7 +965,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -1004,7 +1004,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
@@ -1044,7 +1044,7 @@ jobs:
           fetch-depth: 0
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/477254869654/locations/global/workloadIdentityPools/github/providers/github
           service_account: github@coder-ci.iam.gserviceaccount.com
