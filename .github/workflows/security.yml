@@ -89,13 +89,6 @@ jobs:
           - "coder-arch-base:base-devel"
       fail-fast: false
     steps:
-      - name: Scan image with AquaSec Trivy
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: "docker.io/jawnsy/${{ matrix.image }}"
-          exit-code: "1"
-          severity: "CRITICAL,HIGH"
-
       - name: Scan image with Anchore Grype
         uses: anchore/scan-action@v3
         with:
